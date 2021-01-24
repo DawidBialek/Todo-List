@@ -33,6 +33,7 @@ public class TodoApplication implements CommandLineRunner {
 
 			int option = scanner.nextInt();
 			System.out.println("You choose option " + option);
+			scanner.nextLine();
 
 			if(option == 0){
 				showTasks();
