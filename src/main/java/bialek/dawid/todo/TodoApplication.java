@@ -66,8 +66,9 @@ public class TodoApplication implements CommandLineRunner {
 	}
 
 	private void modifyTask(){
-		System.out.println("Input task id: ");
+		System.out.print("Input task id: ");
 		Long id = scanner.nextLong();
+		System.out.println("After scanning for long");
 		Task task = taskRepository.findById(id).get();
 		System.out.println("What to modify?: ");
 		System.out.println("[0] - Name");
@@ -77,28 +78,29 @@ public class TodoApplication implements CommandLineRunner {
 		System.out.println("You choose option " + option);
 
 		if(option == 0){
-			System.out.println("Existing name: ");
+			System.out.print("Existing name: ");
 			System.out.println(task.getName());
-			System.out.println("Set to: ");
+			scanner.nextLine();
+			System.out.print("Set to: ");
 			String name = scanner.nextLine();
 			task.setName(name);
 
 			taskRepository.save(task);
 
 		} else if(option == 1){
-			System.out.println("Existing priority: ");
+			System.out.print("Existing priority: ");
 			System.out.println(task.getPriority());
-			System.out.println("Set to: ");
+			System.out.print("Set to: ");
+			scanner.nextLine();
 			int priority = scanner.nextInt();
 			task.setPriority(priority);
 			taskRepository.save(task);
 		}
 		System.out.println("Task " + task.getName() + " modified!");
-			addTask();
 	}
 
 	private void deleteTask(){
-		System.out.println("Input task id: ");
+		System.out.print("Input task id: ");
 		Long id = scanner.nextLong();
 		Task task = taskRepository.findById(id).get();
 		taskRepository.delete(task);
