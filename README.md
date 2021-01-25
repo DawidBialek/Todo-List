@@ -18,8 +18,10 @@ Todo list requires [Maven] to run.
 Want to contribute? Great!
 
 ## Todos
- - Write MORE Tests
- - Add Night Mode
+ - Add GUI
+ - Add more tables with relations to database
+ - Add tests
+ - Add REST API
 
 
 License
