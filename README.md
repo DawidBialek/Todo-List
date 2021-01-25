@@ -12,7 +12,7 @@ Todo list is an Spring based application written in Java. It uses simple text in
 
 ## Installation
 
-Dillinger requires [Maven] to run.
+Todo list requires [Maven] to run.
 
 ## Development
 Want to contribute? Great!
