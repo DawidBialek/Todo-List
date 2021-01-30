@@ -1,12 +1,14 @@
 package bialek.dawid.todo;
 
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions.*;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -15,13 +17,14 @@ import java.util.List;
 
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-public class HibernateTest {
+@SpringBootTest
+class HibernateTest {
 
-    @Autowired
-    TaskRepository taskRepository;
+    @MockBean
+    private TaskRepository taskRepository;
     private List<Task> taskList;
 
-    @BeforeEach()
+    @BeforeEach
     public void setup(){
         // Initialize Task mock objects for testing     
         taskList = new ArrayList<Task>();
@@ -50,14 +53,32 @@ public class HibernateTest {
 
     @Test
     public void testSave(){
-        for (Iterator iterator = taskList.iterator(); iterator.hasNext();) {
-            Task Task = (Task) iterator.next();
+        // given
+        Task task4 = new Task();
+        task4.setName("task4");
+        task4.setPriority(1);
 
-            // insert the Task object 
-            taskRepository.save(Task);
+        Task task5 = new Task();
+        task4.setName("task5");
+        task4.setPriority(1);
 
-            assertTrue(Task.getName()+" is saved - Id "+Task.getId(),Task.getId() > 0);
-        }
+        TaskRepository taskRepository = Mockito.mock(TaskRepository.class);
+        Mockito.when(taskRepository.save(task4)).thenReturn(task5);
+
+        Task taskResult = taskRepository.save(task4);
+
+        Assertions.assertEquals(task5, taskResult);
+
+//
+//        for (Iterator iterator = taskList.iterator(); iterator.hasNext();) {
+//            Task Task = (Task) iterator.next();
+//
+//            // insert the Task object
+//            taskRepository.save(Task);
+//
+//
+//            assertTrue(Task.getName()+" is saved - Id "+Task.getId(),Task.getId() > 0);
+//        }
     }
 
     @Test
