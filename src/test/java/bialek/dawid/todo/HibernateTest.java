@@ -139,22 +139,35 @@ class HibernateTest {
     @Test
     public void testFind(){
 
-        // get a Task object from the repository
-        Task TaskObj = taskRepository.findAll().get(1);
+        //given
+        Task task1 = new Task();
+        task1.setName("task1");
+        task1.setPriority(1);
 
-        // compare the id's of passed and retrieved objects.
-        Assertions.assertEquals(TaskObj.getId(), 1);
-        Assertions.assertTrue(TaskObj.getId() == 1);
+        Task task2 = new Task();
+        task2.setName("task2");
+        task2.setPriority(5);
+
+        TaskRepository taskRepository = Mockito.mock(TaskRepository.class);
+        given(taskRepository.findById(1L)).willReturn(Optional.of(task2));
+        //when
+        Task taskResult = taskRepository.findById(1L).get();
+        //then
+        Assertions.assertEquals(task2, taskResult);
     }
 
     @Test
     public void testFindAll(){
+        //given
+        TaskRepository taskRepository = Mockito.mock(TaskRepository.class);
+        given(taskRepository.findAll()).willReturn(prepareMockTasksData());
+
         // get all Task object from the repository
         List<Task> taskList = taskRepository.findAll();
 
         // check if it returns all records from DB
         Assertions.assertTrue(taskList.size() > 0);
-        Assertions.assertEquals(taskList.size(), 4);
+        Assertions.assertEquals(taskList.size(), 3);
     }
 
     private List<Task> prepareMockTasksData(){
