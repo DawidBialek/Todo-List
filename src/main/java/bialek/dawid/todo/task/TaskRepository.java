@@ -1,4 +1,4 @@
-package bialek.dawid.todo;
+package bialek.dawid.todo.task;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

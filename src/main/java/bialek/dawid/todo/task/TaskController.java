@@ -1,9 +1,7 @@
-package bialek.dawid.todo;
+package bialek.dawid.todo.task;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.List;
 
 @RestController
@@ -15,27 +13,21 @@ public class TaskController {
         this.repository = repository;
     }
 
-
-    // Aggregate root
-    // tag::get-aggregate-root[]
     @GetMapping("/Tasks")
     List<Task> all() {
         return repository.findAll();
     }
-    // end::get-aggregate-root[]
 
     @PostMapping("/Tasks")
     Task newTask(@RequestBody Task newTask) {
         return repository.save(newTask);
     }
 
-    // Single item
-
     @GetMapping("/Tasks/{id}")
     Task one(@PathVariable Long id) {
 
         return repository.findById(id)
-                .orElseThrow(() -> new TaskNotFoundException(id));
+                .orElseThrow(() -> new RuntimeException());
     }
 
     @PutMapping("/Tasks/{id}")

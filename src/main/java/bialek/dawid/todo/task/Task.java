@@ -1,5 +1,6 @@
-package bialek.dawid.todo;
+package bialek.dawid.todo.task;
 
+import bialek.dawid.todo.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,6 +17,10 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private String name;
     private int priority;
