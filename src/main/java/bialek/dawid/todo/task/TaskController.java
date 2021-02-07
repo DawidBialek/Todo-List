@@ -37,6 +37,9 @@ public class TaskController {
                 .map(Task -> {
                     Task.setName(newTask.getName());
                     Task.setPriority(newTask.getPriority());
+                    Task.setUser(newTask.getUser());
+                    Task.setDeadline(newTask.getDeadline());
+                    Task.setIsDone(newTask.getIsDone());
                     return repository.save(Task);
                 })
                 .orElseGet(() -> {

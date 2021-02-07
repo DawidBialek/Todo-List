@@ -98,37 +98,37 @@ class HibernateTest {
         Assertions.assertEquals(task2, taskResult);
     }
 
-    public boolean delete(Long id){
-        Optional<Task> byId = taskRepository.findById(id);
-        if (byId != null) {
-            taskRepository.delete(byId);
-        }
-        Optional<Task> removed = taskRepository.findById(id);
-        System.out.println(removed);
-        if (removed.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    @Test
-    public void testDelete(){
-        //given
-        Task task1 = new Task();
-        task1.setName("task1");
-        task1.setPriority(1);
-
-        Task task2 = new Task();
-        task2.setName("task2");
-        task2.setPriority(5);
-
-        TaskRepository taskRepository = Mockito.mock(TaskRepository.class);
-        given(taskRepository.findById(1L)).willReturn(Optional.of(task2)).willReturn(null);
-        //when
-        boolean result = delete(1L);
-        //then
-        Assertions.assertEquals(false, result);
-    }
+//    public boolean delete(Long id){
+//        Task byId = taskRepository.findById(id).orElseThrow(() -> new RuntimeException());
+//        if (byId != null) {
+//            taskRepository.delete(byId);
+//        }
+//        Task removed = taskRepository.findById(id).orElseThrow(() -> new RuntimeException());
+//        System.out.println(removed);
+//        if (removed.equals(null)) {
+//            return false;
+//        }
+//        return true;
+//    }
+//
+//    @Test
+//    public void testDelete(){
+//        //given
+//        Task task1 = new Task();
+//        task1.setName("task1");
+//        task1.setPriority(1);
+//
+//        Task task2 = new Task();
+//        task2.setName("task2");
+//        task2.setPriority(5);
+//
+//        TaskRepository taskRepository = Mockito.mock(TaskRepository.class);
+//        given(taskRepository.findById(1L)).willReturn(Optional.of(task2)).willReturn(null);
+//        //when
+//        boolean result = delete(1L);
+//        //then
+//        Assertions.assertEquals(false, result);
+//    }
 
     @Test
     public void testFind(){

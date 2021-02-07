@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    boolean delete(Optional<Task> l);
+//    boolean delete(Optional<Task> l);
 }
