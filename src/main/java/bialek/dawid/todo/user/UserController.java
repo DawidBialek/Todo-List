@@ -1,6 +1,5 @@
 package bialek.dawid.todo.user;
 
-import bialek.dawid.todo.user.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
