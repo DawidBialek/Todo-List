@@ -1,4 +1,4 @@
-# Todo_List
+# Todo-List
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 Todo list is an Spring based application written in Java. It uses REST endpoints to interact with data through Swagger. CRUD operations on database are done with Hibernate.
