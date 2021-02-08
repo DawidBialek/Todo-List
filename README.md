@@ -19,9 +19,9 @@ Want to contribute? Great!
 
 ## Todos
  - Add GUI
- - Add more tables with relations to database
- - Add tests
- - Add REST API
+ - Add more tables with relations to database - Done
+ - Add tests - WIP
+ - Add REST API - WIP
 
 
 License
