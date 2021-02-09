@@ -1,8 +1,8 @@
-# Todo_List
+# Todo-List
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-Todo list is an Spring based application written in Java. It uses simple text interface to interact with database through Hibernate. For now database consists only of one table with tasks, it's possible to extend it in the future.
-
+Todo list is an Spring based application written in Java. It uses REST endpoints to interact with data through Swagger. CRUD operations on database are done with Hibernate.
+Testing is done using JUnit and Mockito. Simple functions are written with Project Lombok.
 ## Tech
 
 * [Spring Boot]
@@ -19,9 +19,9 @@ Want to contribute? Great!
 
 ## Todos
  - Add GUI
- - Add more tables with relations to database
- - Add tests
- - Add REST API
+ - Add more tables with relations to database - Done
+ - Add tests - WIP
+ - Add REST API - WIP
 
 
 License
