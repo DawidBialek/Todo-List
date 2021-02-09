@@ -2,6 +2,8 @@ package bialek.dawid.todo;
 
 import bialek.dawid.todo.task.Task;
 import bialek.dawid.todo.task.TaskRepository;
+import bialek.dawid.todo.user.User;
+import bialek.dawid.todo.user.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,37 +21,12 @@ class HibernateTest {
 
     @MockBean
     private TaskRepository taskRepository;
+    @MockBean
+    private UserRepository userRepository;
     private List<Task> taskList;
 
-//    @BeforeEach
-//    public void setup(){
-//        // Initialize Task mock objects for testing
-//        taskList = new ArrayList<Task>();
-//
-//        Task task1 = new Task();
-//        task1.setName("task1");
-//        task1.setPriority(1);
-//
-//        Task task2 = new Task();
-//        task2.setName("task2");
-//        task2.setPriority(2);
-//
-//        Task task3 = new Task();
-//        task3.setName("task3");
-//        task3.setPriority(5);
-//
-//        Task task4 = new Task();
-//        task4.setName("task4");
-//        task4.setPriority(1);
-//
-//        taskList.add(task1);
-//        taskList.add(task2);
-//        taskList.add(task3);
-//        taskList.add(task4);
-//    }
-
     @Test
-    public void testSave(){
+    public void testSaveTask(){
         //given
         Task task1 = new Task();
         task1.setName("task1");
@@ -65,17 +42,29 @@ class HibernateTest {
         Task taskResult = taskRepository.save(task1);
         //then
         Assertions.assertEquals(task2, taskResult);
+        
+    }
 
-//
-//        for (Iterator iterator = taskList.iterator(); iterator.hasNext();) {
-//            Task Task = (Task) iterator.next();
-//
-//            // insert the Task object
-//            taskRepository.save(Task);
-//
-//
-//            assertTrue(Task.getName()+" is saved - Id "+Task.getId(),Task.getId() > 0);
-//        }
+    @Test
+    public void testSaveUser(){
+        //given
+        User user1 = new User();
+        user1.setFirstName("Jan");
+        user1.setLastName("Kowalski");
+        user1.setPhoneNumber("620115452");
+
+        User user2 = new User();
+        user1.setFirstName("Adam");
+        user1.setLastName("Nowy");
+        user1.setPhoneNumber("788555120");
+
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        given(userRepository.save(user1)).willReturn(user2);
+        //when
+        User userResult = userRepository.save(user1);
+        //then
+        Assertions.assertEquals(user2, userResult);
+
     }
 
     @Test
@@ -95,7 +84,29 @@ class HibernateTest {
         task1.setPriority(5);
         Task taskResult = taskRepository.save(task1);
         //then
-        Assertions.assertEquals(task2, taskResult);
+        Assertions.assertEquals(5, taskResult.getPriority());
+    }
+
+    @Test
+    public void testModifyUser(){
+        //given
+        User user1 = new User();
+        user1.setFirstName("Jan");
+        user1.setLastName("Kowalski");
+        user1.setPhoneNumber("620115452");
+
+        User user2 = new User();
+        user2.setFirstName("Jan");
+        user2.setLastName("Kowalski");
+        user2.setPhoneNumber("556214368");
+
+        UserRepository userRepository = Mockito.mock(UserRepository.class);
+        given(userRepository.save(user1)).willReturn(user2);
+        //when
+        user1.setPhoneNumber("556214368");
+        User userResult = userRepository.save(user1);
+        //then
+        Assertions.assertEquals("556214368", userResult.getPhoneNumber());
     }
 
 //    public boolean delete(Long id){
